@@ -1,0 +1,203 @@
+
+
+          Save Code
+
+
+          SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("insert into studentab values(@studentid,@studentname,@dob,@gender,@phone,@email)", con);
+            cnn.Parameters.AddWithValue("@StudentId", int.Parse(textBox1.Text));
+            cnn.Parameters.AddWithValue("@StudentName", textBox2.Text);
+            cnn.Parameters.AddWithValue("@Dob", dateTimePicker1.Value);
+            cnn.Parameters.AddWithValue("@Gender", textBox3.Text);
+            cnn.Parameters.AddWithValue("@Phone", textBox4.Text);
+            cnn.Parameters.AddWithValue("@Email", textBox5.Text);
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Record Saved Successfully", "Save", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+          Add Code
+
+
+         SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("select * from studentab", con);
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+            dataGridView1.DataSource = table;
+
+
+
+
+          Update Code
+
+
+          SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("update studentab set studentname=@studentname,dob=@dob,gender=@gender,phone=@phone,email=@email where studentid=@studentid", con);
+            cnn.Parameters.AddWithValue("@StudentId", int.Parse(textBox1.Text));
+            cnn.Parameters.AddWithValue("@StudentName", textBox2.Text);
+            cnn.Parameters.AddWithValue("@Dob", dateTimePicker1.Value);
+            cnn.Parameters.AddWithValue("@Gender", textBox3.Text);
+            cnn.Parameters.AddWithValue("@Phone", textBox4.Text);
+            cnn.Parameters.AddWithValue("@Email", textBox5.Text);
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Record Updated Successfully", "Update", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+           Delete Code
+
+
+           SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("delete studentab where studentid=@studentid", con);
+            cnn.Parameters.AddWithValue("@StudentId", int.Parse(textBox1.Text));
+            
+            cnn.ExecuteNonQuery();
+            con.Close();
+            MessageBox.Show("Record Deleted Successfully", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+           New Code
+
+
+           textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+
+
+
+
+
+
+          Display Code
+
+
+          SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("select * from studentab", con);
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+            dataGridView1.DataSource = table;
+
+
+
+
+          Student Load Code
+
+          SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cnn = new SqlCommand("select * from studentab", con);
+            SqlDataAdapter da = new SqlDataAdapter(cnn);
+            DataTable table = new DataTable();
+            da.Fill(table);
+            dataGridView1.DataSource = table;
+
+
+
+          Dashboard Load Code
+
+          display();
+            display1();
+            display2();
+            display3();
+
+
+
+          private void display()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM studentab", con);
+            Int32 count = Convert.ToInt32(cmd.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lblCount.Text = "0";
+            }
+
+            con.Close();
+
+        }
+
+        private void display1()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM subtab", con);
+            Int32 count = Convert.ToInt32(cmd.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount1.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lblCount1.Text = "0";
+            }
+
+            con.Close();
+
+        }
+
+        private void display2()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM teachertab", con);
+            Int32 count = Convert.ToInt32(cmd.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount2.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lblCount2.Text = "0";
+            }
+
+            con.Close();
+
+        }
+
+        private void display3()
+        {
+            SqlConnection con = new SqlConnection(@"Data Source=DESKTOP-HEEKBHE\SQLEXPRESS;Initial Catalog=schooldb;Integrated Security=True");
+            con.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM entab", con);
+            Int32 count = Convert.ToInt32(cmd.ExecuteScalar());
+            if (count > 0)
+            {
+                lblCount3.Text = Convert.ToString(count.ToString());
+            }
+            else
+            {
+                lblCount3.Text = "0";
+            }
+
+            con.Close();
+
+        }
+
+
+          
